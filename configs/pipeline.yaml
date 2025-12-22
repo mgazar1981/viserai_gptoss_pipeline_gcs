@@ -1,0 +1,34 @@
+data_dir: ./data
+universe_path: ./universe/sp500.csv
+
+intraday:
+  interval: 30m
+  provider: yfinance
+  sigma_lookback_days: 20
+
+macro:
+  fred_series:
+    FEDFUNDS: "Fed Funds"
+    UNRATE: "Unemployment"
+    CPIAUCSL: "CPI"
+    DGS10: "10Y Treasury"
+    DCOILWTICO: "WTI Oil"
+
+research:
+  n_passes: 3
+  max_web_snippets: 10
+  web_provider: none   # none | serpapi
+  serpapi_api_key_env: SERPAPI_API_KEY
+
+dataset:
+  horizon_points: 13
+  schema_version: 1
+
+training:
+  recent_days: 7
+  max_seq_len: 4096
+  lora:
+    enabled: true
+    r: 16
+    alpha: 32
+    dropout: 0.05

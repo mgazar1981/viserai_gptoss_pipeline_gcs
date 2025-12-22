@@ -1,0 +1,12 @@
+# Example crontab (NY time). Edit paths + venv activation.
+# Universe weekly:
+0 3 * * 0 cd /opt/viserai && . .venv/bin/activate && python scripts/update_universe.py >> /var/log/viserai/universe.log 2>&1
+
+# Pre-market:
+30 7 * * 1-5 cd /opt/viserai && . .venv/bin/activate && python scripts/pre_market_run.py >> /var/log/viserai/pre_market.log 2>&1
+
+# Post-market:
+30 16 * * 1-5 cd /opt/viserai && . .venv/bin/activate && python scripts/post_market_run.py >> /var/log/viserai/post_market.log 2>&1
+
+# Train:
+0 17 * * 1-5 cd /opt/viserai && . .venv/bin/activate && python scripts/train_daily.py --model_name_or_path /models/gpt-oss-120b --output_dir /models/checkpoints/latest >> /var/log/viserai/train.log 2>&1
