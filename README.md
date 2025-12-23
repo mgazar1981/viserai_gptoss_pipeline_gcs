@@ -32,7 +32,7 @@ python -m script.spost_market_run.py --limit 10
 
 ## 4) Train (use small model for smoke test)
 ```bash
-python scripts/train_daily.py --model_name_or_path gpt2 --max_steps 50 --limit 200
+python -m scripts.train_daily --model_name_or_path gpt2 --max_steps 50 --limit 200
 ```
 
 ## GPT-OSS inference wiring
