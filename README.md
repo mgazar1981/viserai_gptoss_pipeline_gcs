@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## 1) Universe
 ```bash
-python -m script.supdate_universe
+python -m scripts.update_universe
 ```
 
 ## 2) Pre-market (use dummy GPT client for testing)
