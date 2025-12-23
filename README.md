@@ -16,18 +16,18 @@ pip install -r requirements.txt
 
 ## 1) Universe
 ```bash
-python scripts/update_universe.py
+python -m script.supdate_universe
 ```
 
 ## 2) Pre-market (use dummy GPT client for testing)
 ```bash
 export VISERAI_GPT_MODE=dummy
-python scripts/pre_market_run.py --limit 10 --n_passes 2
+python -m scripts.pre_market_run --limit 10 --n_passes 2
 ```
 
 ## 3) Post-market (fills realized y for previous trading day)
 ```bash
-python scripts/post_market_run.py --limit 10
+python -m script.spost_market_run.py --limit 10
 ```
 
 ## 4) Train (use small model for smoke test)

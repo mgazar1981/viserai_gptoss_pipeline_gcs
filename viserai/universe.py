@@ -1,14 +1,21 @@
-from __future__ import annotations
 import pandas as pd
+import requests
+from io import StringIO
 
 WIKI_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
 
-def fetch_sp500() -> pd.DataFrame:
-    tables = pd.read_html(WIKI_URL)
-    df = tables[0].copy()
-    df.columns = [c.strip() for c in df.columns]
-    df["Symbol"] = df["Symbol"].astype(str).str.replace(".", "-", regex=False)
-    return df.sort_values("Symbol").reset_index(drop=True)
+def fetch_sp500():
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+    }
+    r = requests.get(WIKI_URL, headers=headers, timeout=30)
+    r.raise_for_status()
+    tables = pd.read_html(StringIO(r.text))   # now parsing local HTML
+    return tables[0]
 
 def save_sp500_csv(path: str) -> None:
     df = fetch_sp500()
